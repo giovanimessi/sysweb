@@ -10,14 +10,14 @@ class Categoria extends Model
     use HasFactory;
     public $timestamps = false;
 
-    protected $table ='Categoria';
-    protected $primaryKey = 'id';
+    protected $table = "categorias";
+
     protected $fillable = [
-       'nome',
+        'nome',
         'descricao',
         'condicao'
 
     ];
     //trabalhar variaveis salva
-    protected $guarded = ['id'];
+    protected $guarded = [];
 }

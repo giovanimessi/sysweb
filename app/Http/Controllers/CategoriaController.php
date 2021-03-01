@@ -17,80 +17,109 @@ class CategoriaController extends Controller
 PUBLIC function __construct(){
 
 }
-
     public function index(){
-
-        
-
-            return view('estoque.categoria.index');
-        
+        $dados = Categoria::all();
+      
+         
+    return view('estoque.categoria.index', compact('dados'));
 
     }
       //pesquisar pelo botao de filtro
     public function search(Request $request){
-    $filtro = Categoria::where('name','=','LIKE', "%{$request->searchText}%")
-    ->where('condicao', '=', '1')
-    ->orderBy('id', 'desc')
-    ->paginate(7);
 
-    return view('estoque.categoria.index', compact($filtro));
+        $dados = Categoria::where('nome','LIKE', '%'.$request->search.'%')
+        ->where('condicao', '=', 'Ativo')
+        ->orderBy('id', 'desc')
+        ->paginate(5);
+
+      return view('estoque.categoria.index', compact('dados'));
 
 
+        // if($request){
+    	// 	$query=trim($request->get('search'));
+    	// 	$categorias=DB::table('categoria')
+    	// 	->where('nome', 'LIKE', '%'.$query.'%')
+    	// 	->where('condicao', '=', '1')
+    	// 	->orderBy('idcategoria', 'desc')
+    	// 	->paginate(7);
+    	// 	return view('estoque.categoria.index', [
+    	// 		"categoria"=>$categorias, "search"=>$query
+    	// 		]);
+    	// }
 
-      
+   
 
     }
+    // create 
     public function  create(){
         return view('estoque.categoria.create');
 
 
     }
     public function store(Request $request){
-
         $categorias = new  Categoria();
-        $categorias ->nome = $request->get('nome');
-        $categorias->descricao = $request->get('descricao');
-        $categorias->condicao = 1;
-        $categorias->save();
-        return redirect()->route('admin.categoria');
+        
+        // if(isset($categorias['condicao'])){
+        //     $categorias['condicao'] = 'Ativo'; 
+        //   }else{
+        //     $categorias['condicao'] = 'Inativo';
+        //   }
+         
+        //  $categorias ->nome = $request->get('nome');
+        //  $categorias->descricao = $request->get('descricao');
+        // $categorias->save();
+
+
+      $dados = $request->all();
+
+      if(isset($dados['condicao'])){
+        $dados['condicao'] = 'Ativo'; 
+      }else{
+        $dados['condicao'] = 'Inativo';
+      }
+
+      Categoria::create($dados);
+        return view('estoque.categoria.create',compact('dados'));
+        
+    }
+ 
+    public function editar($id){
+
+        $dados = Categoria::find($id);
         
 
-
-
-    }
-    public function show($id){
-       //exibicao com base no id
-        $p = Categoria::find($id);
-
-        return view('admin.categorias.show',compact('p'));
-
-    }
-    public function edit($id){
-
-        $p = Categoria::find($id);
-
-        return view('admin.categorias.edit',compact('p'));
+        return view('estoque.categoria.edit',compact('dados'));
 
     }
     public function update(Request $request,$id){
-        $p = Categoria::find($id);
-        $categorias = new  Categoria();
-        $categorias ->nome = $request->get('nome');
-        $categorias->descricao = $request->get('descricao');
-        $categorias->condicao = 1;
-        $categorias->update();
-        return redirect()->route('admin.categoria');
+
+        // $p = Categoria::find($id);
+        // $categorias = new  Categoria();
+        // $categorias ->nome = $request->get('nome');
+        // $categorias->descricao = $request->get('descricao');
+        // $categorias->condicao = 1;
+        // $categorias->update();
+        // return redirect()->route('admin.categoria');
+
+        
+      $info = $request->all();
+
+      if(isset($info['condicao'])){
+        $info['condicao'] = 'Ativo'; 
+      }else{
+        $info['condicao'] = 'Inativo';
+      }
+
+      Categoria::find($id)->update($info);
+      
+       return redirect()->route('estoque.categoria');
 
 
     }
-    public function destroy($id){
-        $categorias = new Categoria();
-        $p = Categoria::find($id);
-        $categorias->condicao = 0;
-        $categorias->update();
-        return redirect()->route('admin.categoria');
 
+    public function delete($id){
+    Categoria::find($id)->delete();
+    return redirect()->route('estoque.categoria');
 
-        
     }
 }

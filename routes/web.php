@@ -19,8 +19,18 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
+//categoria 
 Route::get('/', [CategoriaController::class, 'index'])->name('estoque.categoria');
 Route::get('/create', [CategoriaController::class, 'create'])->name('criar');
+Route::post('/adicionar',[CategoriaController::class, 'store'])->name('adicionar');
 //ROTA DE PESQUISA
-Route::post("/busca",[CategoriaController::class, 'search'])->name('categoria.busca');
+Route::post('/busca',[CategoriaController::class, 'search'])->name('categoria.busca');
+Route::get('/edit/{id}',[CategoriaController::class, 'editar'])->name('edit');
+Route::put('/update/{id}',[CategoriaController::class, 'update'])->name('update');
+
+Route::get('/del/{id}',[CategoriaController::class, 'delete'])->name('del');
+
+
+//produtos
+
 
