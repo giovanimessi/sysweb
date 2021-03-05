@@ -35,7 +35,8 @@
                   @include('estoque.categoria.modal')
                 @endforeach
           </table>
-          
+         
+          {{$dados->links()}}
        </div>
     </div>
 </div>

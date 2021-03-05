@@ -17,39 +17,39 @@ class CategoriaController extends Controller
 PUBLIC function __construct(){
 
 }
-    public function index(){
+  
+    public function index(Request $request){
         $dados = Categoria::all();
-      
-         
-    return view('estoque.categoria.index', compact('dados'));
-
-    }
-      //pesquisar pelo botao de filtro
-    public function search(Request $request){
-
         $dados = Categoria::where('nome','LIKE', '%'.$request->search.'%')
-        ->where('condicao', '=', 'Ativo')
-        ->orderBy('id', 'desc')
-        ->paginate(5);
-
-      return view('estoque.categoria.index', compact('dados'));
-
-
-        // if($request){
-    	// 	$query=trim($request->get('search'));
-    	// 	$categorias=DB::table('categoria')
-    	// 	->where('nome', 'LIKE', '%'.$query.'%')
-    	// 	->where('condicao', '=', '1')
-    	// 	->orderBy('idcategoria', 'desc')
-    	// 	->paginate(7);
-    	// 	return view('estoque.categoria.index', [
-    	// 		"categoria"=>$categorias, "search"=>$query
-    	// 		]);
-    	// }
+      ->where('condicao', '=', 'Ativo')
+      ->orderBy('id', 'desc')
+      ->paginate(5);
 
    
 
+    
+    return view('estoque.categoria.index', compact('dados'));
+
+    // $dados = DB::table('categorias')->paginate(5);
+
+    // return view('estoque.categoria.index', ['dados' => $dados]);
+
     }
+    public function search(Request $request){
+
+      $dados = Categoria::where('nome','LIKE', '%'.$request->search.'%')
+      ->where('condicao', '=', 'Ativo')
+      ->orderBy('id', 'desc')
+      ->paginate(5);
+
+
+    return view('estoque.categoria.index', compact('dados'));
+
+
+ 
+  }
+      //pesquisar pelo botao de filtro
+
     // create 
     public function  create(){
         return view('estoque.categoria.create');
@@ -59,15 +59,6 @@ PUBLIC function __construct(){
     public function store(Request $request){
         $categorias = new  Categoria();
         
-        // if(isset($categorias['condicao'])){
-        //     $categorias['condicao'] = 'Ativo'; 
-        //   }else{
-        //     $categorias['condicao'] = 'Inativo';
-        //   }
-         
-        //  $categorias ->nome = $request->get('nome');
-        //  $categorias->descricao = $request->get('descricao');
-        // $categorias->save();
 
 
       $dados = $request->all();
@@ -92,14 +83,6 @@ PUBLIC function __construct(){
 
     }
     public function update(Request $request,$id){
-
-        // $p = Categoria::find($id);
-        // $categorias = new  Categoria();
-        // $categorias ->nome = $request->get('nome');
-        // $categorias->descricao = $request->get('descricao');
-        // $categorias->condicao = 1;
-        // $categorias->update();
-        // return redirect()->route('admin.categoria');
 
         
       $info = $request->all();
