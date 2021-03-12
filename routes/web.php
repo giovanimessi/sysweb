@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ProdutoController;
 use App\Models\Categoria;
+use App\Models\Produto;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 //categoria 
 
 Route::get('/', [CategoriaController::class, 'index'])->name('estoque.categoria');
-Route::get('/create', [CategoriaController::class, 'create'])->name('criar');
+Route::get('/create', [CategoriaController::class, 'create'])->name('create');
 Route::post('/adicionar',[CategoriaController::class, 'store'])->name('adicionar');
 // //ROTA DE PESQUISA
 Route::post('/busca',[CategoriaController::class, 'search'])->name('categoria.busca');
@@ -36,3 +37,7 @@ Route::get('/del/{id}',[CategoriaController::class, 'delete'])->name('del');
 //produtos
 
 Route::get('/produtos',[ ProdutoController::class, 'index'])->name('produtos');
+Route::get('/produtos/criar', [ProdutoController::class, 'criar'])->name('criar');
+Route::post('produtos/dados',[ProdutoController::class, 'store'])->name('save');
+
+

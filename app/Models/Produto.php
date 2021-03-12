@@ -4,7 +4,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Categoria extends Model
+class Produto extends Model
 {
     use HasFactory;
     public $timestamps = false;
@@ -12,7 +12,7 @@ class Categoria extends Model
     protected $table = 'produtos';
 
     protected $fillable = [
-        'idprodutos',
+        'id',
         'nome',
         'codigo',
         'estoque',
