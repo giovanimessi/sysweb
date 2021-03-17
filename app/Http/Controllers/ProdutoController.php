@@ -68,7 +68,8 @@ class ProdutoController extends Controller
           }
     
            $produto->save();
-           return redirect()->route('produtos')->with('mensagem', 'Produto cadastrado com sucesso!');;
+           return redirect()->route('produtos')
+           ->with('errors', 'Apartamento está com paciente no momento');
         
 
     
