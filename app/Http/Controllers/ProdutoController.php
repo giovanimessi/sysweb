@@ -69,7 +69,7 @@ class ProdutoController extends Controller
     
            $produto->save();
            return redirect()->route('produtos')
-           ->with('errors', 'Apartamento está com paciente no momento');
+           ->with('errors', 'Criando com sucessso');
         
 
     

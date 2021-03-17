@@ -24,10 +24,7 @@ PUBLIC function __construct(){
       ->where('condicao', '=', 'Ativo')
       ->orderBy('id', 'desc')
       ->paginate(5);
-
    
-
-    
     return view('estoque.categoria.index', compact('dados'));
 
     // $dados = DB::table('categorias')->paginate(5);
@@ -45,8 +42,6 @@ PUBLIC function __construct(){
 
     return view('estoque.categoria.index', compact('dados'));
 
-
- 
   }
       //pesquisar pelo botao de filtro
 
@@ -58,13 +53,7 @@ PUBLIC function __construct(){
     }
     public function store(CategoriaForm $request){
 
-   
-
-
         $categorias = new  Categoria();
-        
-
-
       $dados = $request->all();
 
       if(isset($dados['condicao'])){
@@ -72,7 +61,6 @@ PUBLIC function __construct(){
       }else{
         $dados['condicao'] = 'Inativo';
       }
-
       Categoria::create($dados);
         return view('estoque.categoria.create',compact('dados'));
         

@@ -25,10 +25,20 @@ class CategoriaForm extends FormRequest
     {
         return [
             //
-            'nome'=>'required|max = 100',
-            'descricao'=>'max = 256',
+            'nome'=>'required|string|max:255',
+            'descricao'=>'required|string|max: 512',
             
             
+        ];
+    }
+    public function message(){
+
+        return [
+            
+          
+            'nome'=>'required|string|max:255',
+            'descricao'=>'required|string|max: 512',
+           
         ];
     }
 }

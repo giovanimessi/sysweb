@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\PessoaController;
 use App\Http\Controllers\ProdutoController;
 use App\Models\Categoria;
 use App\Models\Produto;
@@ -45,6 +46,11 @@ Route::get('/produtos/edit/{id}',[ProdutoController::class, 'editar'])->name('ed
 Route::put('/produtos/update/{id}',[ProdutoController::class, 'update'])->name('upd');
 Route::get('/produtos/delete/{id}',[ProdutoController::class, 'delete'])->name('delete');
 
+
+
+//pessoa
+
+Route::get('/vendas;clientes',[PessoaController::class, 'index'])->name('clientes');
 
 
 
