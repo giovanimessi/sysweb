@@ -36,8 +36,18 @@ Route::get('/del/{id}',[CategoriaController::class, 'delete'])->name('del');
 
 //produtos
 
+
 Route::get('/produtos',[ ProdutoController::class, 'index'])->name('produtos');
 Route::get('/produtos/criar', [ProdutoController::class, 'criar'])->name('criar');
-Route::post('produtos/dados',[ProdutoController::class, 'store'])->name('save');
+Route::post('/produtos/dados',[ProdutoController::class, 'store'])->name('save');
+Route::post('/produtos/dado/{id}',[ProdutoController::class, 'show']);
+Route::get('/produtos/edit/{id}',[ProdutoController::class, 'editar'])->name('editar');
+Route::put('/produtos/update/{id}',[ProdutoController::class, 'update'])->name('upd');
+Route::get('/produtos/delete/{id}',[ProdutoController::class, 'delete'])->name('delete');
+
+
+
+
+
 
 

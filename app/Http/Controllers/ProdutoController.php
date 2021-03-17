@@ -25,13 +25,11 @@ class ProdutoController extends Controller
             ->where('p.nome','LIKE','%'.$query.'%')
             ->where('estado', '=', 'Ativo')
             ->orderBy('idprodutos', 'desc')
-            ->paginate(3);
+            ->paginate(6);
             return view('estoque.produto.index', [
     			"produtos"=>$produtos, "pesText"=>$query
     			]);
-        
-
-
+    
         }
 
 
@@ -46,25 +44,32 @@ class ProdutoController extends Controller
 
         return view('estoque.produto.create',compact('categorias'));
     }
-    public function store(Request $request ){
-        $produtos = new Produto();
-        $produtos -> id = $request->get('id');
-        $produtos ->nome = $request ->get('nome');
-        $produtos ->codigo = $request->get('codigo');
-         $produtos ->estoque = $request->get('estoque');
-         $produtos -> descricao = $request->get('descricao');
-        //  $produtos ->estado = 'Ativo';
+    public function store(RequestProdutos $request ){
+        
+        $produto = new Produto();
+        $produto -> id = $request->get('id');
+        $produto ->nome = $request ->get('nome');
+        $produto ->codigo = $request->get('codigo');
+         $produto ->estoque = $request->get('estoque');
+         $produto -> descricao = $request->get('descricao');
+         $produto ->estado = 'Ativo';
 
-        if($request->hasfile('imagem')){
+       
+         if($request->hasFile('imagem')){
             $imagem = $request->file('imagem');
-            $imagem->move(public_path().'/imagens/produtos/', 
-    			$imagem->getClientOriginalName());
-    		$produtos->imagem=$imagem->getClientOriginalName();
-    	
-        }
-
-           $produtos->save();
-           return redirect()->route('produtos');
+            $num = rand(0,9999);
+            $dir = "imagens/produtos/";
+            $ext = $imagem->guessClientExtension();
+            $nomeImagemCriar = 'imagem_'.$num.".".$ext;
+            $imagem->move($dir,$nomeImagemCriar);
+            $produto['imagem'] = $dir."/".$nomeImagemCriar;
+    
+           
+          }
+    
+           $produto->save();
+           return redirect()->route('produtos')->with('mensagem', 'Produto cadastrado com sucesso!');;
+        
 
     
     }
@@ -74,4 +79,49 @@ class ProdutoController extends Controller
 
 
     }
+    public function editar($id){
+        $produto = Produto::find($id);
+
+        $categorias = DB::table('categorias')
+        ->where('condicao', '=', 'Ativo')
+        ->get();
+
+
+        return view('estoque.produto.edit', compact('produto', 'categorias'));
+
+
+
+    }
+
+    public function update(Request $request,$id){
+        $produto=Produto::findOrFail($id);
+    	
+    	$produto->id=$request->get('id');
+    	$produto->codigo=$request->get('codigo');
+    	$produto->nome=$request->get('nome');
+    	
+        if($request->hasFile('imagem')){
+            $imagem = $request->file('imagem');
+            $num = rand(0,9999);
+            $dir = "imagens/produtos/";
+            $ext = $imagem->guessClientExtension();
+            $nomeImagemCriar = 'imagem_'.$num.".".$ext;
+            $imagem->move($dir,$nomeImagemCriar);
+            $produto['imagem'] = $dir."/".$nomeImagemCriar;
+    
+           
+          }
+           
+
+    	$produto->update();
+    	return redirect()->route('produtos');
+    }
+
+    public function delete($id){
+        $produto=Produto::findOrFail($id);
+    	$produto->estado='Inativo';
+    	$produto->update();
+    	return Redirect()->route('produtos');
+         }
+
 }

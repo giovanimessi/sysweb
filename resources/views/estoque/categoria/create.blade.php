@@ -7,6 +7,17 @@
     
 <h2><span>Adiconar Categoria</span></h2>
 
+@if ($errors->any())
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+<br />
+@endif
+
 
 <form method="POST" action="{{route('adicionar')}}">
     @csrf
@@ -14,7 +25,7 @@
     <div class="form-group">
         <label for="nome">Nome</label>
         <input type="text" name="nome" class="form-control" required placeholder="digite seu nome...">
-        
+    
     </div>
     <div class="form-group">
         <label for="descricao">Descrição</label>

@@ -56,7 +56,11 @@ PUBLIC function __construct(){
 
 
     }
-    public function store(Request $request){
+    public function store(CategoriaForm $request){
+
+   
+
+
         $categorias = new  Categoria();
         
 

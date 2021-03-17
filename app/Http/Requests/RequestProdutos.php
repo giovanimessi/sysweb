@@ -24,15 +24,29 @@ class RequestProdutos extends FormRequest
     public function rules()
     {
         return [
-            //
+            
             'id' => 'required',
-            'nome'=>'required|max = 100',
-            'codigo'=>'required| max = 50',
+            'nome'=>'required|string|max:255',
+            'codigo'=>'required',
             'estoque'=>'required| numeric',
-            'descricao'=>'required| max = 512',
-            'imagem' => 'mines:jpeg,bmp,png'
+            'descricao'=>'required|string|max: 512',
+            'avatar' => 'mines:jpeg,bmp,png'
 
             
         ];
     }
-}
+    public function messagem(){
+        return [
+            
+            'id' => 'required',
+            'nome'=>'required|string|max:255',
+            'codigo'=>'required',
+            'estoque'=>'required| numeric',
+            'descricao'=>'required|string|max: 512',
+            'avatar' => 'mines:jpeg,bmp,png'
+
+            
+        ];
+        
+    }
+   }

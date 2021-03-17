@@ -32,17 +32,21 @@
                             <td>{{$prod->estoque}}</td>
                             <td>{{$prod->estado}}</td>
                                 <td>
-                                    <img src="{{asset('imagens/produtos/'.$prod->imagem)}}" width='100px',height="100px" alt="{{$prod->nome}}" class="img-tumbnail">
+                                    <img src="{{asset($prod->imagem)}}" width='100px',height="100px" alt="{{$prod->nome}}" class="img-tumbnail">
                                 </td>
                                 <td>
-                                    <a href="" class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span></a>
-                                    <a href="" ><button class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button></a>
+                                    <a href="{{route('editar',$prod->idprodutos)}}" class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span></a>
+                                    <a href="" data-target="#modal-delete-{{$prod->idprodutos}}" data-toggle="modal"><button class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button></a>
                                 </td>
                         </tr>
+                        @include('estoque.produto.modal')
                         @endforeach                  
                     </table>
-                    {{$produtos->render()}}
+                     
+          {{$produtos->links()}}
+                  
                 </div>
+             
             </div>
         </div>
     </div>

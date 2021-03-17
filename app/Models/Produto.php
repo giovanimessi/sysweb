@@ -8,10 +8,13 @@ class Produto extends Model
 {
     use HasFactory;
     public $timestamps = false;
+    protected $primaryKey = 'idprodutos';
+    
 
     protected $table = 'produtos';
 
     protected $fillable = [
+     
         'id',
         'nome',
         'codigo',
