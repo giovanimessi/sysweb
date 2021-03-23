@@ -31,18 +31,13 @@ class ProdutoController extends Controller
     			]);
     
         }
-
-
-
     }
     public function criar(){
 
           $categorias = DB::table('categorias')
           ->where('condicao', '=', 'Ativo')
           ->get();
-
-
-        return view('estoque.produto.create',compact('categorias'));
+          return view('estoque.produto.create',compact('categorias'));
     }
     public function store(RequestProdutos $request ){
         

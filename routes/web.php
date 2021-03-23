@@ -4,7 +4,9 @@ use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\PessoaController;
 use App\Http\Controllers\ProdutoController;
 use App\Models\Categoria;
-use App\Models\Produto;
+use App\Models\Produto
+;
+use App\Models\Peaaaoa;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -50,7 +52,16 @@ Route::get('/produtos/delete/{id}',[ProdutoController::class, 'delete'])->name('
 
 //pessoa
 
-Route::get('/vendas;clientes',[PessoaController::class, 'index'])->name('clientes');
+Route::get('/vendas/clientes',[PessoaController::class, 'index'])->name('clientes');
+Route::get('/vendas/clientes/create',[PessoaController::class, 'create'])->name('criaClientes');
+Route::post('/vendas/store',[PessoaController::class, 'store'])->name('salvar');
+Route::post('/vendas/clientes/exibi/{id}',[PessoaController::class, 'show']);
+Route::get('/venda/cliente/editar/{id}',[PessoaController::class, 'editar'])->name('vendaEditar');
+Route::put('/venda/cliente/update/{id}',[PessoaController:: class, 'update'])->name('vendaUpdate');
+Route::get('/venda/cliente/dele/{id}',[PessoaController::class, 'delete'])->name('excluir');
+
+
+
 
 
 

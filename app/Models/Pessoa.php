@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Pessoas extends Model
+class Pessoa extends Model
 {
     
         use HasFactory;
@@ -18,11 +18,11 @@ class Pessoas extends Model
             'tipo_pessoas',
             'nome',
             'tipo_documento',
-            'num_documento',
+            'num_doc',
             'endereco',
             'telefone',
-            'email',
-            'idfornecedor'    
+            'email'
+             
         ];
         //trabalhar variaveis salva
         protected $guarded = [];
