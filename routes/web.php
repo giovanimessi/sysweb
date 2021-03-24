@@ -3,10 +3,10 @@
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\PessoaController;
 use App\Http\Controllers\ProdutoController;
+use App\Http\Controllers\HomeController;
 use App\Models\Categoria;
-use App\Models\Produto
-;
-use App\Models\Peaaaoa;
+use App\Models\Produto;
+use App\Models\Pessooa;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,17 +24,21 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
+//login
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
 //categoria 
 
-Route::get('/', [CategoriaController::class, 'index'])->name('estoque.categoria');
-Route::get('/create', [CategoriaController::class, 'create'])->name('create');
-Route::post('/adicionar',[CategoriaController::class, 'store'])->name('adicionar');
+Route::get('/categoria', [CategoriaController::class, 'index'])->name('estoque.categoria');
+Route::get('/categoria/create', [CategoriaController::class, 'create'])->name('create');
+Route::post('/categoria/adicionar',[CategoriaController::class, 'store'])->name('adicionar');
 // //ROTA DE PESQUISA
-Route::post('/busca',[CategoriaController::class, 'search'])->name('categoria.busca');
-Route::get('/edit/{id}',[CategoriaController::class, 'editar'])->name('edit');
-Route::put('/update/{id}',[CategoriaController::class, 'update'])->name('update');
+Route::post('/categoria/busca',[CategoriaController::class, 'search'])->name('categoria.busca');
+Route::get('/categoria/edit/{id}',[CategoriaController::class, 'editar'])->name('edit');
+Route::put('/categoria/update/{id}',[CategoriaController::class, 'update'])->name('update');
 
-Route::get('/del/{id}',[CategoriaController::class, 'delete'])->name('del');
+Route::get('/categoria/del/{id}',[CategoriaController::class, 'delete'])->name('del');
 
 
 //produtos
